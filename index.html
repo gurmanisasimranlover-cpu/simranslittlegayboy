@@ -74,6 +74,12 @@
     .lightbox-inner{max-width:min(92vw,1100px);max-height:90vh}
     .lightbox-inner img{width:100%;height:auto;border-radius:14px}
     .lightbox-caption{margin-top:8px;color:#e2e8f0;text-align:center}
+    /* Notes grid */
+    .notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:900px){.notes-grid{grid-template-columns:repeat(3,1fr)}}
+    .noteBtn{font-size:28px;line-height:1;padding:20px;border-radius:16px;border:1px solid #2a3550;background:#10162a;cursor:pointer;box-shadow:0 10px 24px rgba(255,77,109,.08);transition:transform .15s ease, box-shadow .2s ease}
+    .noteBtn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 16px 36px rgba(255,77,109,.18)}
+    .noteBtn:active{transform:translateY(0) scale(.98)}
   </style>
 </head>
 <body>
@@ -101,15 +107,21 @@
       <h2 style="margin:0 0 6px">Kafka & Dostoevsky — love lines</h2>
       <div id="note" class="chip">Loading…</div>
     </section>
-    <section class="card" id="photos" style="margin-top:16px">
-      <h2 style="margin:0 0 8px">Our photos</h2>
-      
-      <div class="photo-grid">
-        <figure class="photo"><img src="IMG_6647.JPG" alt=""><figcaption></figcaption></figure>
-        <figure class="photo"><img src="IMG_5275.jpeg" alt=""><figcaption></figcaption></figure>
-        <figure class="photo"><img src="4F534E94-DDF6-4031-9C79-F60A7C0F32AF.jpg" alt=""><figcaption></figcaption></figure>
-        <figure class="photo"><img src="E102A508-CE07-40EB-839F-707A55BBC76A.jpg" alt=""><figcaption></figcaption></figure>
+    <section class="card" id="notes" style="margin-top:16px">
+      <h2 style="margin:0 0 8px">Little love notes</h2>
+      <p class="subtitle" style="margin:0 0 12px">Tap a heart to reveal a message 💌</p>
+      <div class="notes-grid">
+        <button class="noteBtn" data-msg="I love the way you look at me like I’m the only one in the room." aria-label="Love note 1">❤️</button>
+        <button class="noteBtn" data-msg="Thank you for being my safe place and my favorite adventure." aria-label="Love note 2">❤️</button>
+        <button class="noteBtn" data-msg="Every ordinary day is better with you in it." aria-label="Love note 3">❤️</button>
+        <button class="noteBtn" data-msg="Your laugh is my favorite sound." aria-label="Love note 4">❤️</button>
+        <button class="noteBtn" data-msg="If I could choose again, I’d choose you every time." aria-label="Love note 5">❤️</button>
+        <button class="noteBtn" data-msg="You make me want to be kinder, braver, truer." aria-label="Love note 6">❤️</button>
+        <button class="noteBtn" data-msg="Holding your hand makes the world feel quiet." aria-label="Love note 7">❤️</button>
+        <button class="noteBtn" data-msg="I’m grateful for your patience, your softness, and your strength." aria-label="Love note 8">❤️</button>
+        <button class="noteBtn" data-msg="I don’t need perfect days—just days with you." aria-label="Love note 9">❤️</button>
       </div>
+      <div id="notesOut" class="messages" style="margin-top:16px"></div>
     </section>
 
     <section class="card" id="letter" style="margin-top:16px">
@@ -285,6 +297,18 @@
       });
     });
     lb.addEventListener('click', ()=> lb.classList.remove('active'));
+      // ===== Love notes reveal =====
+    const out = document.getElementById('notesOut');
+    document.querySelectorAll('.noteBtn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const chip=document.createElement('div');
+        chip.className='chip';
+        chip.textContent=btn.dataset.msg || '';
+        out.prepend(chip);
+        if(out.childElementCount>6){ out.lastElementChild.remove(); }
+        spawnConfetti(40); cancelAnimationFrame(anim); loop();
+      });
+    });
   </script>
 </body>
 </html>
