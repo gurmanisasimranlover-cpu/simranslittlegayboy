@@ -9,26 +9,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#0b0f19; --card:#11162a; --text:#f1f5f9; --muted:#9aa6b2; --accent:#ff4d6d; --accent2:#7c3aed; --ring:rgba(255,77,109,.35); }
+    :root{
+      --bg:#0b0f19; --card:#11162a; --text:#f1f5f9; --muted:#9aa6b2; --accent:#ff4d6d; --accent2:#7c3aed; --ring:rgba(255,77,109,.35);
+    }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Poppins,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 600px at 80% -10%, rgba(255,77,109,.10), transparent 60%), radial-gradient(900px 500px at 10% -5%, rgba(124,58,237,.10), transparent 60%), var(--bg);color:var(--text)}
+    html,body{margin:0;padding:0;font-family:Poppins,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1000px 600px at 80% -10%, rgba(255,77,109,.10), transparent 60%), radial-gradient(900px 500px at 10% -5%, rgba(124,58,237,.10), transparent 60%), var(--bg);color:var(--text);}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{max-width:980px;margin:0 auto;padding:0 20px}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#ff9aa2);color:white;font-weight:800;border:none;cursor:pointer;box-shadow:0 14px 30px var(--ring);transition:transform .15s ease, box-shadow .2s ease}
     .btn:hover{transform:translateY(-1px);box-shadow:0 16px 36px var(--ring)}
     .btn.ghost{background:transparent;border:1px solid #2a3550;color:var(--text);box-shadow:none}
-
     header{padding:24px 0}
     .title{font-size:44px;line-height:1.1;margin:0 0 10px;font-weight:800}
     .subtitle{color:#cbd5e1;margin-top:0}
 
+    /* Card */
     .card{background:linear-gradient(180deg,#0e1425,#0a0e19);border:1px solid #1d2742;border-radius:22px;padding:22px;position:relative;overflow:hidden}
 
+    /* Floating hearts background */
     .float-hearts{pointer-events:none;position:fixed;inset:0;overflow:hidden;z-index:0}
     .heart{position:absolute;font-size:14px;opacity:.7;animation:rise 12s linear infinite}
-    @keyframes rise{0%{transform:translateY(100vh) scale(.8) rotate(0)}100%{transform:translateY(-10vh) scale(1) rotate(360deg)}}
+    @keyframes rise{0%{transform:translateY(100vh) scale(.8) rotate(0deg)}100%{transform:translateY(-10vh) scale(1) rotate(360deg)}}
 
+    /* Question block */
     .center{display:grid;place-items:center;min-height:70vh}
     .question{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
     .q{font-size:28px;margin:0}
@@ -36,15 +40,27 @@
     #yes{min-width:120px}
     #no{min-width:120px;background:#0f1526;border:1px solid #2b3756;color:#e2e8f0}
 
+    /* Message area */
     .messages{margin-top:26px;display:grid;gap:8px}
     .chip{display:inline-block;padding:10px 14px;border-radius:14px;border:1px solid #2a3550;background:#0f1526;color:#e2e8f0}
 
+    /* Reveal modal */
     .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(2,6,23,.75);z-index:40}
     .modal.active{display:grid}
     .modal-card{width:min(720px,92vw);border-radius:22px;background:linear-gradient(180deg,#0e1425,#0a0e19);border:1px solid #1d2742;padding:22px}
+    .modal-card h2{margin:0 0 8px}
+    .modal-card p{color:#cbd5e1}
 
+    /* Confetti pieces */
     .confetti{position:fixed;top:0;left:0;pointer-events:none;z-index:50}
 
+    footer{padding:40px 0;color:#9aa6b2;text-align:center}
+    /* Photos */
+    .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media(max-width:900px){.photo-grid{grid-template-columns:1fr 1fr}}
+    .photo{position:relative;border-radius:16px;overflow:hidden;border:1px solid #1f2a47}
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .photo figcaption{position:absolute;left:10px;bottom:10px;background:rgba(2,6,23,.6);backdrop-filter:blur(4px);padding:6px 10px;border-radius:10px;font-size:12px;color:#e2e8f0;border:1px solid #253252}
     /* Photos */
     .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     @media(max-width:900px){.photo-grid{grid-template-columns:1fr 1fr}}
@@ -58,11 +74,10 @@
     .lightbox-inner{max-width:min(92vw,1100px);max-height:90vh}
     .lightbox-inner img{width:100%;height:auto;border-radius:14px}
     .lightbox-caption{margin-top:8px;color:#e2e8f0;text-align:center}
-
-    footer{padding:40px 0;color:#9aa6b2;text-align:center}
   </style>
 </head>
 <body>
+  <!-- floating hearts background -->
   <div class="float-hearts" id="bgHearts"></div>
 
   <header class="container">
@@ -83,17 +98,17 @@
     </div>
 
     <section class="card" style="margin-top:16px" id="quotes">
-      <h2 style="margin:0 0 6px">I LOVE YOU SIMRAN</h2>
+      <h2 style="margin:0 0 6px">Kafka & Dostoevsky — love lines</h2>
       <div id="note" class="chip">Loading…</div>
     </section>
-
     <section class="card" id="photos" style="margin-top:16px">
       <h2 style="margin:0 0 8px">Our photos</h2>
+      
       <div class="photo-grid">
-        <figure class="photo"><img src="photos/IMG_6647.jpeg" alt=""><figcaption></figcaption></figure>
-        <figure class="photo"><img src="photos/IMG_5275.jpeg" alt=""><figcaption></figcaption></figure>
-        <figure class="photo"><img src="photos/4F534E94-DDF6-4031-9C79-F60A7C0F32AF.jpeg" alt=""><figcaption></figcaption></figure>
-        <figure class="photo"><img src="photos/E102A508-CE07-40EB-839F-707A55BBC76A.jpeg" alt=""><figcaption></figcaption></figure>
+        <figure class="photo"><img src="IMG_6647.JPG" alt=""><figcaption></figcaption></figure>
+        <figure class="photo"><img src="IMG_5275.jpeg" alt=""><figcaption></figcaption></figure>
+        <figure class="photo"><img src="4F534E94-DDF6-4031-9C79-F60A7C0F32AF.jpg" alt=""><figcaption></figcaption></figure>
+        <figure class="photo"><img src="E102A508-CE07-40EB-839F-707A55BBC76A.jpg" alt=""><figcaption></figcaption></figure>
       </div>
     </section>
 
@@ -101,25 +116,34 @@
       <h2 style="margin:0 0 8px">A letter to you</h2>
       <p class="subtitle" style="margin:0 0 12px">From Gurman, to Simran.</p>
       <div class="chip" style="line-height:1.65">
-        <p style="margin-top:0">Simran, I am writing this to say something simple and true. I love you. I love the way your voice softens my worries, the way your laughter finds me even on the days that feel heavy. I love the steadiness you bring to my life and the gentle courage you give me to be better. With you, ordinary moments have a quiet brightness. A walk, a call, a shared look,each one becomes a small piece of home.</p>
-        <p>When I think about us, I do not reach for grand promises. I reach for the everyday: showing up, listening well, holding your hand when the world is loud, cheering for you when you doubt, respecting you in every choice, and choosing you again and again. I want to learn you for a lifetime,the stories you have not told yet, the dreams you are still shaping, the places we will discover together.</p>
+        <p style="margin-top:0">Simran, I am writing this to say something simple and true. I love you. I love the way your voice softens my worries, the way your laughter finds me even on the days that feel heavy. I love the steadiness you bring to my life and the gentle courage you give me to be better. With you, ordinary moments have a quiet brightness. A walk, a call, a shared look—each one becomes a small piece of home.</p>
+        <p>When I think about us, I do not reach for grand promises. I reach for the everyday: showing up, listening well, holding your hand when the world is loud, cheering for you when you doubt, respecting you in every choice, and choosing you again and again. I want to learn you for a lifetime—the stories you have not told yet, the dreams you are still shaping, the places we will discover together.</p>
         <p>I do not love you with fireworks; I love you with a steady flame. It is warm, patient, and honest. It makes room for both your strength and your softness. I am grateful for your trust, for your kindness, and for the way you let me see you as you are. I am here, today and all the days to come. Thank you for being my person. I love you.</p>
       </div>
     </section>
+
+      <section class="card" id="lightbox" aria-hidden="true" style="display:none"></section>
   </main>
 
+  <!-- Modal shown after Yes -->
   <div class="modal" id="loveModal" aria-hidden="true">
     <div class="modal-card">
       <h2>Yay! You said Yes 💖</h2>
-      <p id="lovePara">I KNEW U WOULD SAY YES I LOVE YOU SOO MUCH MY NIGGA, sometimes you say you haven't done enough nice things for me, but there isnt anything nicer, any greater honor you can show me than simply being with me, allowing me to sit infront of you.</p>
+      <p id="lovePara">Simran, you are my safe place, my laughter, and my forever. Thank you for loving me back.</p>
       <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:12px">
         <button class="btn ghost" id="closeModal">Close</button>
       </div>
     </div>
   </div>
 
+  <!-- Confetti canvas -->
   <canvas id="confetti" class="confetti"></canvas>
 
+  <footer>
+    Made with love by Gurman • ♡
+  </footer>
+
+  <!-- Lightbox for photos -->
   <div class="lightbox" id="lb">
     <div class="lightbox-inner">
       <img id="lbImg" alt="Photo" />
@@ -127,21 +151,22 @@
     </div>
   </div>
 
-  <footer>Made with love by Gurman • ♡</footer>
-
   <script>
-    // Background hearts
+    // ===== Floating hearts background =====
     const bg = document.getElementById('bgHearts');
     const heartChars = ['❤️','🩷','💖','💘','💝','💕'];
     for(let i=0;i<40;i++){
       const s = document.createElement('div');
-      s.className='heart'; s.textContent=heartChars[Math.floor(Math.random()*heartChars.length)];
-      s.style.left=Math.random()*100+'vw'; s.style.animationDelay=(Math.random()*12)+'s'; s.style.fontSize=(12+Math.random()*22)+'px';
+      s.className = 'heart';
+      s.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
+      s.style.left = Math.random()*100 + 'vw';
+      s.style.animationDelay = (Math.random()*12) + 's';
+      s.style.fontSize = (12 + Math.random()*22) + 'px';
       bg.appendChild(s);
     }
 
-    // Rotating quotes (no author labels)
-    const messages=[
+    // ===== Messages and love notes =====
+    const messages = [
       'You are the knife I turn inside myself.',
       'I miss you differently each time you go.',
       'To love is to see a miracle invisible to others.',
@@ -149,46 +174,117 @@
       'I am forever yours; be mine as I am yours.',
       'You are at once the quiet and the storm of my heart.'
     ];
-    const noteEl=document.getElementById('note');
-    let noteIdx=0; const setNote=()=>{ if(noteEl){ noteEl.textContent=messages[noteIdx%messages.length]; noteIdx++; } };
-    setNote(); setInterval(setNote,4000);
 
-    // Yes / No
-    const yes=document.getElementById('yes');
-    const no=document.getElementById('no');
-    const msg=document.getElementById('msg');
-    let grow=1;
+    const noteEl = document.getElementById('note');
+    let noteIdx = 0;
+    const setNote = () => { noteEl.textContent = messages[noteIdx % messages.length]; noteIdx++; };
+    setNote();
+    setInterval(setNote, 4000);
+
+    // ===== Yes / No logic =====
+    const yes = document.getElementById('yes');
+    const no = document.getElementById('no');
+    const msg = document.getElementById('msg');
+    let grow = 1;
+
     function teaseNo(){
-      const x=(Math.random()*160-80);
-      const y=(Math.random()*160-80);
-      no.style.transform=`translate(${x}%, ${y}%) rotate(${(Math.random()*16-8)}deg)`;
-      grow+=0.12; yes.style.transform=`scale(${Math.min(1+grow*0.2,2.4)})`;
-      const chip=document.createElement('div'); chip.className='chip'; chip.textContent='Why do you hate me?'; msg.prepend(chip);
+      // Move the No button far away and spam message
+      const x = (Math.random()*160 - 80); // -80% to 80%
+      const y = (Math.random()*160 - 80);
+      no.style.transform = `translate(${x}%, ${y}%) rotate(${(Math.random()*16-8)}deg)`;
+      grow += 0.12;
+      yes.style.transform = `scale(${Math.min(1+grow*0.2, 2.4)})`;
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.textContent = 'Why do you hate me?';
+      msg.prepend(chip);
       if(msg.childElementCount>10){ msg.lastElementChild.remove(); }
     }
-    no.addEventListener('mouseenter',teaseNo);
-    no.addEventListener('click',teaseNo);
-    no.addEventListener('touchstart',teaseNo,{passive:true});
+    }
 
-    // Confetti hearts
-    const canvas=document.getElementById('confetti'); const ctx=canvas.getContext('2d');
-    function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; } addEventListener('resize',resize); resize();
-    let pieces=[]; function spawnConfetti(n=220){ pieces=[]; for(let i=0;i<n;i++){ pieces.push({x:Math.random()*canvas.width,y:-20-Math.random()*canvas.height*0.3,r:6+Math.random()*10,s:1+Math.random()*3,a:Math.random()*Math.PI*2,h:['#ff4d6d','#ff9aa2','#ffd6e7','#c4b5fd','#a78bfa'][Math.floor(Math.random()*5)]}); } }
-    function drawHeart(x,y,size,color){ ctx.save(); ctx.fillStyle=color; ctx.translate(x,y); ctx.rotate(Math.sin(y*0.02)*0.3); ctx.beginPath(); const s=size/15; ctx.moveTo(0,-3*s); ctx.bezierCurveTo(-5*s,-12*s,-16*s,-2*s,0,8*s); ctx.bezierCurveTo(16*s,-2*s,5*s,-12*s,0,-3*s); ctx.fill(); ctx.restore(); }
-    let anim; function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); pieces.forEach(p=>{ p.y+=p.s; p.x+=Math.sin(p.y*0.02+p.a)*1.2; drawHeart(p.x,p.y,p.r,p.h); }); pieces=pieces.filter(p=>p.y<canvas.height+40); anim=requestAnimationFrame(loop); }
+    no.addEventListener('mouseenter', teaseNo);
+    no.addEventListener('click', teaseNo);
+    no.addEventListener('touchstart', teaseNo, {passive:true});
 
-    const modal=document.getElementById('loveModal'); const closeModal=document.getElementById('closeModal');
+    // ===== Confetti hearts on Yes =====
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+    addEventListener('resize', resize); resize();
+
+    let pieces = [];
+    function spawnConfetti(n=180){
+      pieces = [];
+      for(let i=0;i<n;i++){
+        pieces.push({
+          x: Math.random()*canvas.width,
+          y: -20 - Math.random()*canvas.height*0.3,
+          r: 6+Math.random()*10,
+          s: 1+Math.random()*3, // speed
+          a: Math.random()*Math.PI*2, // angle for sway
+          h: ['#ff4d6d','#ff9aa2','#ffd6e7','#c4b5fd','#a78bfa'][Math.floor(Math.random()*5)]
+        });
+      }
+    }
+    function drawHeart(x,y,size,color){
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.translate(x,y); ctx.rotate(Math.sin(y*0.02)*0.3);
+      ctx.beginPath();
+      const s = size/15;
+      ctx.moveTo(0, -3*s);
+      ctx.bezierCurveTo( -5*s, -12*s, -16*s, -2*s, 0, 8*s );
+      ctx.bezierCurveTo( 16*s, -2*s, 5*s, -12*s, 0, -3*s );
+      ctx.fill();
+      ctx.restore();
+    }
+    let anim;
+    function loop(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p=>{
+        p.y += p.s;
+        p.x += Math.sin(p.y*0.02 + p.a) * 1.2;
+        drawHeart(p.x,p.y,p.r,p.h);
+      });
+      pieces = pieces.filter(p=> p.y < canvas.height+40);
+      anim = requestAnimationFrame(loop);
+    }
+
+    // Modal reveal
+    const modal = document.getElementById('loveModal');
+    const closeModal = document.getElementById('closeModal');
     function openModal(){ modal.classList.add('active'); modal.setAttribute('aria-hidden','false'); }
     function hideModal(){ modal.classList.remove('active'); modal.setAttribute('aria-hidden','true'); }
     closeModal.addEventListener('click', hideModal);
 
-    yes.addEventListener('click',()=>{ spawnConfetti(220); cancelAnimationFrame(anim); loop(); const chip=document.createElement('div'); chip.className='chip'; chip.textContent='I knew it. You and me, always.'; msg.prepend(chip); setTimeout(openModal,600); });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') hideModal(); });
+    yes.addEventListener('click', ()=>{
+      spawnConfetti(220);
+      cancelAnimationFrame(anim); loop();
+      // Show sweet line
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.textContent = 'I knew it. You and me, always.';
+      msg.prepend(chip);
+      // After a moment, open modal
+      setTimeout(openModal, 600);
+    });
 
-    // Lightbox
-    const lb=document.getElementById('lb'); const lbImg=document.getElementById('lbImg'); const lbCap=document.getElementById('lbCap');
-    document.querySelectorAll('#photos .photo img').forEach(img=>{ img.addEventListener('click',()=>{ lbImg.src=img.src; lbCap.textContent=img.closest('figure').querySelector('figcaption')?.textContent||''; lb.classList.add('active'); }); });
-    lb.addEventListener('click',()=> lb.classList.remove('active'));
+    // Accessibility: focus trap basic
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='Escape') hideModal();
+    });
+
+    // ===== Photo lightbox =====
+    const lb = document.getElementById('lb');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    document.querySelectorAll('#photos .photo img').forEach(img=>{
+      img.addEventListener('click', ()=>{
+        lbImg.src = img.src; lbCap.textContent = img.closest('figure').querySelector('figcaption')?.textContent || '';
+        lb.classList.add('active');
+      });
+    });
+    lb.addEventListener('click', ()=> lb.classList.remove('active'));
   </script>
 </body>
 </html>
